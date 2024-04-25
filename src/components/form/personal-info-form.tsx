@@ -1,17 +1,19 @@
-import { FC } from "react";
+// import { FC } from "react";
 import { FormField, FormItem, FormLabel, FormMessage, FormControl } from "../ui/form";
 import { Input } from "../ui/input";
-import { UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { Inputs } from "./form2";
 
-interface Props {
-	form: UseFormReturn<Inputs>;
-}
-const PersonalInfoForm: FC<Props> = ({ form }) => {
+// interface Props {
+// 	form: UseFormReturn<Inputs>;
+// }
+const PersonalInfoForm = () => {
+	const { control } = useFormContext<Inputs>();
+
 	return (
 		<>
 			<FormField
-				control={form.control}
+				control={control}
 				name="name"
 				render={({ field }) => (
 					<FormItem>
@@ -24,7 +26,7 @@ const PersonalInfoForm: FC<Props> = ({ form }) => {
 				)}
 			/>
 			<FormField
-				control={form.control}
+				control={control}
 				name="email"
 				render={({ field }) => (
 					<FormItem>

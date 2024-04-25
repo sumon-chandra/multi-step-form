@@ -1,7 +1,7 @@
 import { formDataSchema } from "@/utils/form-data-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -49,13 +49,15 @@ const FormTwo = () => {
 
 	return (
 		<div className="p-6 bg-slate-200">
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(processForm)}>
-					{currentStep === 0 && <PersonalInfoForm form={form} />}
-					{currentStep === 1 && <OtherInfoForm form={form} />}
-					{currentStep === 2 && <CompleteMessage />}
-				</form>
-			</Form>
+			<FormProvider {...form}>
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(processForm)}>
+						{currentStep === 0 && <PersonalInfoForm />}
+						{currentStep === 1 && <OtherInfoForm />}
+						{currentStep === 2 && <CompleteMessage />}
+					</form>
+				</Form>
+			</FormProvider>
 			<div className="mt-4 flex justify-between">
 				<Button onClick={prev}>Prev</Button>
 				<Button onClick={next}>Next</Button>

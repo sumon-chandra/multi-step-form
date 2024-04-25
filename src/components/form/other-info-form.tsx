@@ -1,21 +1,23 @@
-import { UseFormReturn } from "react-hook-form";
+// import { FC } from "react";
+import { useFormContext } from "react-hook-form";
 import { Inputs } from "./form2";
-import { FC } from "react";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import { RadioGroupItem, RadioGroup } from "../ui/radio-group";
 
-interface Props {
-	form: UseFormReturn<Inputs>;
-}
+// interface Props {
+// 	form: UseFormReturn<Inputs>;
+// }
 
-const OtherInfoForm: FC<Props> = ({ form }) => {
+const OtherInfoForm = () => {
+	const { control } = useFormContext<Inputs>();
+
 	return (
 		<div className="space-y-4">
 			<FormField
-				control={form.control}
+				control={control}
 				name="city"
 				render={({ field }) => (
 					<FormItem>
@@ -28,7 +30,7 @@ const OtherInfoForm: FC<Props> = ({ form }) => {
 				)}
 			/>
 			<FormField
-				control={form.control}
+				control={control}
 				name="mobileNo"
 				render={({ field }) => (
 					<FormItem>
@@ -41,7 +43,7 @@ const OtherInfoForm: FC<Props> = ({ form }) => {
 				)}
 			/>
 			<FormField
-				control={form.control}
+				control={control}
 				name="role"
 				render={({ field }) => (
 					<FormItem>
@@ -63,7 +65,7 @@ const OtherInfoForm: FC<Props> = ({ form }) => {
 				)}
 			/>
 			<FormField
-				control={form.control}
+				control={control}
 				name="verified"
 				render={({ field }) => (
 					<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border">
@@ -75,7 +77,7 @@ const OtherInfoForm: FC<Props> = ({ form }) => {
 				)}
 			/>
 			<FormField
-				control={form.control}
+				control={control}
 				name="profession"
 				render={({ field }) => (
 					<FormItem className="mt-2">
