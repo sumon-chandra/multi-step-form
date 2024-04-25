@@ -7,5 +7,7 @@ export const formDataSchema = z.object({
 	mobileNo: z.string(),
 	role: z.string(),
 	verified: z.boolean().default(false),
-	profession: z.string(),
+	profession: z.enum(["student", "jobHolder"], {
+		required_error: "You have to select a profession.",
+	}),
 });
