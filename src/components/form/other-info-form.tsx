@@ -6,29 +6,24 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import { RadioGroupItem, RadioGroup } from "../ui/radio-group";
+import { FC } from "react";
+import { motion } from "framer-motion";
 
-// interface Props {
-// 	form: UseFormReturn<Inputs>;
-// }
+interface Props {
+	// form: UseFormReturn<Inputs>;
+	delta: number;
+}
 
-const OtherInfoForm = () => {
+const OtherInfoForm: FC<Props> = ({ delta }) => {
 	const { control } = useFormContext<Inputs>();
 
 	return (
-		<div className="space-y-4">
-			<FormField
-				control={control}
-				name="city"
-				render={({ field }) => (
-					<FormItem>
-						<FormLabel>City</FormLabel>
-						<FormControl>
-							<Input placeholder="Enter your city name" {...field} />
-						</FormControl>
-						<FormMessage />
-					</FormItem>
-				)}
-			/>
+		<motion.div
+			className="space-y-4"
+			initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+			animate={{ x: 0, opacity: 1 }}
+			transition={{ duration: 0.5, ease: "easeInOut" }}
+		>
 			<FormField
 				control={control}
 				name="mobileNo"
@@ -54,7 +49,7 @@ const OtherInfoForm = () => {
 									<SelectValue placeholder="Select a role" />
 								</SelectTrigger>
 							</FormControl>
-							<SelectContent>
+							<SelectContent className="bg-white">
 								<SelectItem value="admin">Admin</SelectItem>
 								<SelectItem value="moderator">Moderator</SelectItem>
 								<SelectItem value="user">User</SelectItem>
@@ -101,7 +96,7 @@ const OtherInfoForm = () => {
 					</FormItem>
 				)}
 			/>
-		</div>
+		</motion.div>
 	);
 };
 

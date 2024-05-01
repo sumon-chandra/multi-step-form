@@ -3,13 +3,15 @@ import { FormField, FormItem, FormLabel, FormMessage, FormControl } from "../ui/
 import { Input } from "../ui/input";
 import { useFormContext } from "react-hook-form";
 import { Inputs } from "./form2";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
+import { motion } from "framer-motion";
 
-// interface Props {
-// 	form: UseFormReturn<Inputs>;
-// }
-const PersonalInfoForm = () => {
+interface Props {
+	// form: UseFormReturn<Inputs>;
+	delta: number;
+}
+const PersonalInfoForm: FC<Props> = ({ delta }) => {
 	const { control } = useFormContext<Inputs>();
 	const [selectedAvatar, setSelectedAvatar] = useState<File>();
 
@@ -22,7 +24,11 @@ const PersonalInfoForm = () => {
 	};
 
 	return (
-		<>
+		<motion.div
+			initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+			animate={{ x: 0, opacity: 1 }}
+			transition={{ duration: 0.5, ease: "easeInOut" }}
+		>
 			<FormField
 				control={control}
 				name="name"
@@ -78,7 +84,7 @@ const PersonalInfoForm = () => {
 					</Avatar>
 				</div>
 			)}
-		</>
+		</motion.div>
 	);
 };
 
